@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       lista: [{ id: 1, desc: 'Super', fecha: '10/05/2023', monto: 5000, cat: 'a' }, { id: 2, desc: 'Transporte', fecha: '10/05/2023', monto: 1000, cat: 'b'},
-      { id: 3, desc: 'Transporte', fecha: '10/05/2023', monto: 1000, cat:'c' }],
+      { id: 3, desc: 'Transporte', fecha: '10/05/2023', monto: 1000, cat:'c' },  { id: 4, desc: 'Otro', fecha: '16/05/2023', monto: 5000, cat:'c' }],
       elemento: {},
       
     }
