@@ -43,6 +43,7 @@ export default {
         .then(response => {
           // Manejar la respuesta si es necesario
           this.listaGastos.push(response.data);
+          this.$router.push('/detail')
         })
         .catch(error => {
           console.error(error);
