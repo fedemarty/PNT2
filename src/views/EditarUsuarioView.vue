@@ -2,9 +2,14 @@
   <ion-page >
     <ion-content >
       <h2>Editar Usuario</h2>
-      <ion-input v-model="usuario.email" label="email" type="email"></ion-input>
-      <ion-input v-model="usuario.passw" label="password" type="password"></ion-input>
-      <ion-button @click="edicion">Confirmar</ion-button>
+      <ion-list v-for="us in lista" :key="us.id">
+        {{ us.id }} {{ us.name }} {{us.email}} {{us.password}}
+      <ion-button @click="modificar(us.id)">Modificar</ion-button>
+      <ion-button @click="eliminar(us.id)">Eliminar</ion-button>
+      </ion-list>  
+      <ion-input v-model="us.name" label="name" type="name"></ion-input>
+      <ion-input v-model="us.email" label="email" type="email"></ion-input>
+      <ion-input v-model="us.password" label="password" type="password"></ion-input>
     </ion-content>
   </ion-page>
 </template>
@@ -12,6 +17,7 @@
 <script>
 import { IonPage, IonButton, IonInput, IonContent } from "@ionic/vue";
 import { useLoginStore } from "../stores/login";
+import userService from '../services/usersService'
 
 export default {
   components: { IonPage, IonButton, IonInput, IonContent },
@@ -22,15 +28,20 @@ export default {
   },
   data() {
     return {
-      usuario: { email: "", passw: "" },
+      usuario: { name:"", email: "", passw: "", id:"" },
     };
   },
   methods: {
-    edicion() {
-      this.usuario = { email: usuario.email, passw: "" };
-      console.log("Se edito el usuario a la BD")
-      this.$router.push("/detail");
-  },
+    async modificar(id) {
+      try {
+        const user = { ...this.usuario.id }
+        //await axios.put("https://6464027e127ad0b8f895db50.mockapi.io/lista/" + id, user)
+        await userService.modificar(id,user)
+        // await this.cargarLista()
+      } catch ( error) {
+          alert(error)
+      }
+    },
   },
 };
 </script>
