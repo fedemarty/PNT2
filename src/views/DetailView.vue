@@ -1,6 +1,9 @@
 <template >
   <ion-page>
     <h1>Detalle de gastos</h1>
+  <div>
+    <p>{{ userID }}</p>
+  </div>
     <ion-content>
       <ion-grid>
         <ion-row style="background-color: #0775c4;">
@@ -41,56 +44,52 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow } from '@ionic/vue'
 import { create, trash, add } from 'ionicons/icons';
+import listaGastos from '../services/listaGastos'
+import { useLoginStore } from "../stores/login";
 export default {
   components: { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow },
   setup() {
-    return { create, trash, add };
-  },
+    const store = useLoginStore();
+    const { login } = store;
+    return { create, trash, add, login, store };
+      },
   data() {
     return {
-      listaGastos: []
-    }
+      listaGastos: [],
+      userID:1
+       }
   },
   methods: {
-    agregarGasto() {
-      this.$router.push("/agregarGasto")
+   
+    async agregar() {
+      try {
+        const elem = { ...this.elemento }
+        await listaGastos.agregar(elem)
+        this.cargarLista()
+      } catch (error) {
+        console.log(error);
+      }
     },
-    agregarGasto() {
-      this.$router.push("/agregarGasto")
+    async cargarLista() {
+      try {
+        this.listaGastos = await listaGastos.cargar(this.userID)
+      } catch (e) {
+        alert(e)
+      }
     },
-    editarGasto() {
-      this.$router.push("/editarGasto")
+    async eliminar(id) {
+      try {
+        await listaGastos.eliminar(id)
+        await this.cargarLista()
+      } catch (error) {
+        alert(error)
+      }
     },
-    eliminarGasto(e) {
-      this.lista.pop(e)
-    },
-    agregarCategoria() {
-      this.$router.push("/agregarCategoria")
-    },
-    agregarCategoria() {
-      this.$router.push("/agregarCategoria")
-    },
-    editarCategoria() {
-      this.$router.push("/editarCategoria")
-    },
-    eliminarCategoria(e) {
-      this.lista.pop(e)
-    },
-    obtenerInformacion() {
-      axios.get('https://6464028c043c103502b0bf69.mockapi.io/gastos')
-        .then(response => {
-          this.listaGastos = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
   },
   mounted() {
-    this.obtenerInformacion();
+    this.cargarLista();
   }
 }
 
@@ -116,4 +115,5 @@ ion-row:nth-child(even) {
 
 ion-col {
   border-right: 1px solid #dddddd;
-}</style>
+}
+</style>
