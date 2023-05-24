@@ -62,7 +62,9 @@ export default {
        }
   },
   methods: {
-   
+    agregarGasto() {
+      this.$router.push("/agregarGasto")
+    },
     async agregar() {
       try {
         const elem = { ...this.elemento }
