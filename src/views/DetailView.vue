@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       listaGastos: [],
-      userID:1
+      userID:0
        }
   },
   methods: {

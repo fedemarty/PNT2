@@ -1,15 +1,15 @@
 <template>
-  <ion-page >
-    <ion-content >
+  <ion-page>
+    <ion-content>
       <h2>Editar Usuario</h2>
-      <ion-list v-for="us in lista" :key="us.id">
-        {{ us.id }} {{ us.name }} {{us.email}} {{us.password}}
-      <ion-button @click="modificar(us.id)">Modificar</ion-button>
-      <ion-button @click="eliminar(us.id)">Eliminar</ion-button>
-      </ion-list>  
-      <ion-input v-model="us.name" label="name" type="name"></ion-input>
-      <ion-input v-model="us.email" label="email" type="email"></ion-input>
-      <ion-input v-model="us.password" label="password" type="password"></ion-input>
+       <!-- <ion-list v-for="u in usuario" :key="u.id">
+        {{ u.id }} {{ u.name }} {{ u.email }} {{ u.passw }} 
+      </ion-list>  -->
+      <ion-input v-model="name" label="Name:" type="name"></ion-input>
+      <ion-input v-model="email" label="Email:" type="email"></ion-input>
+      <ion-input v-model="passw" label="Password:" type="password"></ion-input>
+      <ion-button @click="modificar">Modificar</ion-button>
+      <ion-button @click="eliminar">Eliminar</ion-button>
     </ion-content>
   </ion-page>
 </template>
@@ -17,7 +17,7 @@
 <script>
 import { IonPage, IonButton, IonInput, IonContent } from "@ionic/vue";
 import { useLoginStore } from "../stores/login";
-import userService from '../services/usersService'
+import userService from "../services/usersService";
 
 export default {
   components: { IonPage, IonButton, IonInput, IonContent },
@@ -28,22 +28,29 @@ export default {
   },
   data() {
     return {
-      usuario: { name:"", email: "", passw: "", id:"" },
+      usuario: { name: "", email: "", passw: "", id: "" },
     };
   },
   methods: {
     async modificar(id) {
       try {
-        const user = { ...this.usuario.id }
-        //await axios.put("https://6464027e127ad0b8f895db50.mockapi.io/lista/" + id, user)
-        await userService.modificar(id,user)
-        // await this.cargarLista()
+        const user = { ...this.usuario.id };
+        await userService.modificar(id, user);
+        alert("Datos Modificados")
+      } catch (error) {
+        alert(error);
+      }
+    },
+    async eliminar(id) {
+      try {
+        await usersService.eliminar(id)
+        alert("Usuario eliminado")
       } catch ( error) {
           alert(error)
       }
-    },
   },
-};
+},
+}
 </script>
 
 <style>
