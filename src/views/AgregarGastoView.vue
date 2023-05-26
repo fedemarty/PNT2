@@ -3,7 +3,9 @@
     <h1>Agregar Gasto</h1>
     <ion-content>
       <ion-input label="Id:" label-placement="stacked" v-model="nuevoObjeto.id"></ion-input>
-      <ion-input label="Fecha:" label-placement="stacked" v-model="nuevoObjeto.fecha"></ion-input>
+      <ion-datetime-button label="Fecha:" label-placement="stacked" v-model="nuevoObjeto.fecha"></ion-datetime-button>
+      <ion-datetime></ion-datetime>
+      <!--<ion-input label="Fecha:" label-placement="stacked" v-model="nuevoObjeto.fecha"></ion-input> -->
       <ion-input label="Descripcion:" label-placement="stacked" v-model="nuevoObjeto.name"></ion-input>
       <ion-input label="Monto:" label-placement="stacked" v-model="nuevoObjeto.monto"></ion-input>
       <ion-button @click="agregar"> Agregar a la lista </ion-button>
@@ -12,12 +14,12 @@
 </template>
 
 <script>
-import { IonPage, IonButton, IonInput, IonContent } from "@ionic/vue";
+import { IonPage, IonButton, IonInput, IonContent,IonDatetime, IonDatetimeButton } from "@ionic/vue";
 import listaGastos from "../services/listaGastos"
 import { useLoginStore } from "../stores/login";
 
 export default {
-  components: { IonPage, IonButton, IonInput, IonContent },
+  components: { IonPage, IonButton, IonInput, IonContent, IonDatetimeButton, IonDatetime },
   setup() {
    
   },

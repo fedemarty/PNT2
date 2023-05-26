@@ -28,9 +28,9 @@
           <ion-col size-sm="2">{{ e.name }}</ion-col>
           <ion-col size-sm="2">${{ e.monto }}</ion-col>
           <ion-col size-sm="2">{{ e.cat }}</ion-col>
-          <ion-col size="auto" @click='editarGasto' style="border: 0px;"><ion-button><ion-icon slot="icon-only"
+          <ion-col size="auto" @click='modificar(e.id)' style="border: 0px;"><ion-button><ion-icon slot="icon-only"
                 :icon="create"></ion-icon></ion-button></ion-col>
-          <ion-col size="auto" @click='eliminarGasto(e)' style="border: 0px;"><ion-button> <ion-icon slot="icon-only"
+          <ion-col size="auto" @click='eliminar(e.id)' style="border: 0px;"><ion-button> <ion-icon slot="icon-only"
                 :icon="trash"></ion-icon>
 
             </ion-button></ion-col>
@@ -87,6 +87,16 @@ export default {
         await this.cargarLista()
       } catch (error) {
         alert(error)
+      }
+    },
+    async modificar(id) {
+      try {
+        const elem = { ...this.elemento }
+        //await axios.put("https://6464027e127ad0b8f895db50.mockapi.io/lista/" + id, elem)
+        await listaGastos.modificar(id,elem)
+        await this.cargarLista()
+      } catch ( error) {
+          alert(error)
       }
     },
   },
