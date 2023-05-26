@@ -65,6 +65,9 @@ export default {
     agregarGasto() {
       this.$router.push("/agregarGasto")
     },
+    modificar(){
+      this.$router.push("/editarGasto");
+    },
     async agregar() {
       try {
         const elem = { ...this.elemento }
@@ -87,16 +90,6 @@ export default {
         await this.cargarLista()
       } catch (error) {
         alert(error)
-      }
-    },
-    async modificar(id) {
-      try {
-        const elem = { ...this.elemento }
-        //await axios.put("https://6464027e127ad0b8f895db50.mockapi.io/lista/" + id, elem)
-        await listaGastos.modificar(id,elem)
-        await this.cargarLista()
-      } catch ( error) {
-          alert(error)
       }
     },
   },

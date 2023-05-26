@@ -3,11 +3,11 @@
       <h1>Editar Gasto</h1>
       <ion-content> 
         <ion-input label="Id:" label-placement="stacked" v-model="elemento.id"></ion-input>
-        <ion-input label="Fecha:" label-placement="stacked" v-model="elemento.fecha"></ion-input>
-        <ion-input label="Descripcion:" label-placement="stacked" v-model="elemento.desc"></ion-input>
+        <ion-input label="Fecha:" label-placement="stacked" :value="elemento.fecha" readonly></ion-input>
+        <ion-input label="Descripcion:" label-placement="stacked" v-model="elemento.name"></ion-input>
         <ion-input label="Monto:" label-placement="stacked" v-model="elemento.monto"></ion-input>
-        <ion-button @click="agregar"> ACEPTAR </ion-button>
-        <ion-button @click="agregar"> VOLVER </ion-button>
+        <ion-button @click="modificar(elemento.id)"> ACEPTAR </ion-button>
+        <ion-button @click="volver"> VOLVER </ion-button>
       </ion-content>
     </ion-page>
   </template>
@@ -15,6 +15,7 @@
   <script>
   import { IonPage, IonButton, IonInput, IonContent } from "@ionic/vue";
   import { useLoginStore } from "../stores/login";
+import listaGastos from '../services/listaGastos';
   
   export default {
     components: { IonPage, IonButton, IonInput, IonContent },
@@ -29,15 +30,26 @@
       };
     },
     methods: {
-      agregar() {
-        console.log("Se edito el gasto")
+      async modificar(id) {
+      try {
+        const elem = { ...this.elemento }
+        await listaGastos.modificar(id,elem)
+        this.$router.push('/detail')
+      } catch ( error) {
+         alert(error)
+      }
+      },
+      volver(){
         this.$router.push("/detail");
+      },
+      obtenerFechaActual() {
+    const fechaActual = new Date().toISOString().slice(0, 10);
+    this.elemento.fecha = fechaActual;
+  },
     },
-       volver(){
-        this.$router.push("/detail");
-       }
-
-    },
+    mounted() {
+  this.obtenerFechaActual();
+},
   };
   </script>
   
