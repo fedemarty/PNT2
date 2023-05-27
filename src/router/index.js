@@ -11,6 +11,7 @@ import AgregarCategoriaView from '../views/AgregarCategoriaView.vue'
 import CrearUsuarioView from '../views/CrearUsuarioView.vue'
 import EditarUsuarioView from '../views/EditarUsuarioView.vue'
 import EditarGastoView from '../views/EditarGastoView.vue'
+import EditarCategoriaView from '../views/EditarCategoriaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,35 +47,41 @@ const router = createRouter({
       component: DetailView
     },
     {
-      path:'/:pathMatch(.*)*',
-      name:"NotFound",
+      path: '/:pathMatch(.*)*',
+      name: "NotFound",
       component: NotFoundView
-    },  
+    },
     {
-      path:'/agregarGasto',
-      name:"agregarGasto",
+      path: '/agregarGasto',
+      name: "agregarGasto",
       component: AgregarGastoView
-    },  
+    },
     {
-      path:'/Categoria',
-      name:"Categoria",
+      path: '/categoria',
+      name: "Categoria",
       component: CategoriaView
-    }, 
+    },
     {
-      path:'/agregarCategoria',
-      name:"agregarCategoria",
+      path: '/agregarCategoria',
+      name: "agregarCategoria",
       component: AgregarCategoriaView
-    }, 
+    },
     {
-      path:'/crearUsuario',
-      name:"crearUsuario",
+      path: '/editarCategoria',
+      name: "editarCategoria",
+      component: EditarCategoriaView
+    },
+
+    {
+      path: '/crearUsuario',
+      name: "crearUsuario",
       component: CrearUsuarioView
-    },  
+    },
     {
-      path:'/editarUsuario',
-      name:"editarUsuario",
+      path: '/editarUsuario',
+      name: "editarUsuario",
       component: EditarUsuarioView
-    },  
+    },
     {
       path: '/about',
       name: 'about',

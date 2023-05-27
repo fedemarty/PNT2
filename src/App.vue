@@ -20,6 +20,7 @@ export default {
       <RouterLink to="/">Home |</RouterLink>
       <RouterLink to="/about">About |</RouterLink>
       <RouterLink v-if="isLogin" to="/system">System |</RouterLink>
+      <RouterLink v-if="isLogin" to="/categoria">Categoria |</RouterLink>
       <RouterLink v-if="!isLogin" to="/login">Login |</RouterLink>
       <RouterLink v-if="isLogin" to="/logout">Logout |</RouterLink>
       <RouterLink v-if="isLogin" to="/editarUsuario">EditarUsuario |</RouterLink>
