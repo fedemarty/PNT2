@@ -2,7 +2,6 @@
     <ion-page>
         <h1>Agregar Categoría</h1>
         <ion-content>
-            <ion-input label="Id:" label-placement="stacked" v-model="nuevoObjeto.id"></ion-input>
             <ion-input label="Categoría:" label-placement="stacked" v-model="nuevoObjeto.categoria"></ion-input>
             <ion-button @click="agregar"> Agregar Categoría </ion-button>
         </ion-content>
