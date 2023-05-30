@@ -4,9 +4,7 @@
     
     <ion-content>
       
-      <ion-button @click="iradetalles">
-        Ir a Detalles
-      </ion-button>
+      
 
     </ion-content>
    

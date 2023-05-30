@@ -24,6 +24,7 @@ export default {
       <RouterLink v-if="!isLogin" to="/login">Login |</RouterLink>
       <RouterLink v-if="isLogin" to="/logout">Logout |</RouterLink>
       <RouterLink v-if="isLogin" to="/editarUsuario">EditarUsuario |</RouterLink>
+      <RouterLink v-if="isLogin" to="/detail">Detalles |</RouterLink>
     </ion-header>
     <ion-router-outlet />
   </ion-app>
