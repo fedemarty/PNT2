@@ -47,6 +47,7 @@
 import { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow } from '@ionic/vue'
 import { create, trash, add } from 'ionicons/icons';
 import listaGastos from '../services/listaGastos'
+import listaCategorias from "../services/listaCategorias"
 import { useLoginStore } from "../stores/login";
 export default {
   components: { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow },
@@ -58,6 +59,7 @@ export default {
   data() {
     return {
       listaGastos: [],
+      listaCategorias: [],
       userID:0
        }
   },
@@ -80,6 +82,7 @@ export default {
     async cargarLista() {
       try {
         this.listaGastos = await listaGastos.cargar(this.userID)
+        this.listaCategorias = await listaCategorias.cargar()
       } catch (e) {
         alert(e)
       }
