@@ -29,24 +29,24 @@ export default {
   name: 'login',
   data() {
     return {
-      usuario: {email:"",password:""},
+      usuario: {name:"", email:"",password:"", userID:0},
     };
   },
   methods: {
    async logear() {
     const miusuario = await usersService.cargarUsuarioXID(this.usuario.email)
-    // console.log(miusuario)
-      if (
-        this.usuario =  miusuario) {
-       console.log(this.usuario)
-         this.usuario = {userID:0, email: "", password: "" };
+    console.log(miusuario)
+      if (this.usuario.email ==  miusuario.email && this.usuario.password == miusuario.password) {
+        this.login(miusuario)
+        console.log(miusuario)
+        this.usuario = {name:"", email:"",password:"", userID:0};
         this.$router.push('/detail');
       } else {
         alert("Credenciales invalidas");
       }
     },
     crear(){
-      this.usuario = { email: "", password: "" };
+      this.usuario = {name:"", email:"",password:"", userID:0};
       this.$router.push("/crearUsuario");
     }
   },

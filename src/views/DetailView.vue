@@ -2,7 +2,7 @@
   <ion-page>
     <h1>Detalle de gastos</h1>
     <div>
-      <p>{{ userIDtest }}</p>
+      <!-- <p>{{ userIDtest }}</p> -->
       <p>{{ userLOGIN }}</p>
     </div>
     <ion-content>
@@ -24,11 +24,11 @@
 
           </ion-col>
         </ion-row>
-        <ion-row v-for="e in listaGastos" :key="e.id">
+        <ion-row v-for="e in listasGastos" :key="e.id">
           <ion-col size-sm="2">{{ e.fecha }}</ion-col>
           <ion-col size-sm="2">{{ e.name }}</ion-col>
           <ion-col size-sm="2">${{ e.monto }}</ion-col>
-          <ion-col size-sm="2">{{ buscarCategoriaXID(e.cat) }}</ion-col>
+          <ion-col size-sm="2">{{ e.cat }}</ion-col>
           <ion-col size="auto" @click='modificar(e.id)' style="border: 0px;"><ion-button><ion-icon slot="icon-only"
                 :icon="create"></ion-icon></ion-button></ion-col>
           <ion-col size="auto" @click='eliminar(e.id)' style="border: 0px;"><ion-button> <ion-icon slot="icon-only"
@@ -60,9 +60,9 @@ export default {
   },
   data() {
     return {
-      listaGastos: [],
-      listaCategorias: [],
-      userIDtest: 80,
+      listasGastos: [],
+      listasCategorias: [],
+      //userIDtest: 80,
       categoria: {}
     }
   },
@@ -77,7 +77,6 @@ export default {
       try {
         const elem = { ...this.elemento }
         await listaGastos.agregar(elem)
-        this.cargarLista()
       } catch (error) {
         console.log(error);
       }
@@ -85,9 +84,11 @@ export default {
     async cargarLista() {
       this.usuario = this.userLOGIN;
       try {
-        this.listaGastos = await listaGastos.cargar(this.userLOGIN.userID)
-        console.log(this.listaGastos)
-        this.listaCategorias = await listaCategorias.cargar()
+        this.listasGastos = await listaGastos.cargar(this.userLOGIN.userID)
+        this.listasCategorias = await listaCategorias.cargar()
+        console.log(this.listasCategorias)
+        console.log(this.listasGastos)
+        console.log(this.userLOGIN.userID)
         } catch (e) {
         alert(e)
       }
@@ -104,14 +105,14 @@ export default {
     buscarCategoriaXID(id) {
      
       try {
-        //this.listaCategorias.forEach(element => {
+        //this.listasCategorias.forEach(element => {
         //this.categoria=element;
         //console.log(element);
         //}
         //);
         //console.log( "-----"+this.listaCategorias.find(e => e.id ==id))
   
-        return this.listaCategorias.find(objeto => objeto.id == id).categoria
+        return this.listasCategorias.find(objeto => objeto.id == id).categoria
 
       } catch (error) {
         return "sin categoria"}
