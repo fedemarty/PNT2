@@ -4,7 +4,7 @@
       <h2>Login</h2>
       <ion-input v-model="usuario.email" label="Email:" type="email"></ion-input>
       <ion-input
-        v-model="usuario.passw"
+        v-model="usuario.password"
         label="Password:"
         type="password"
       ></ion-input>
@@ -26,27 +26,27 @@ export default {
     const { login } = store;
     return { login };
   },
+  name: 'login',
   data() {
     return {
-      usuario: { email: "", passw: "", userID:"" },
+      usuario: {email:"",password:""},
     };
   },
   methods: {
    async logear() {
     const miusuario = await usersService.cargarUsuarioXID(this.usuario.email)
-console.log(miusuario)
+    // console.log(miusuario)
       if (
         this.usuario =  miusuario) {
-        this.login(miusuario.id)
-        
-        this.usuario = { email: "", passw: "" };
-        this.$router.push("/detail");
+       console.log(this.usuario)
+         this.usuario = {userID:0, email: "", password: "" };
+        this.$router.push('/detail');
       } else {
         alert("Credenciales invalidas");
       }
     },
     crear(){
-      this.usuario = { email: "", passw: "" };
+      this.usuario = { email: "", password: "" };
       this.$router.push("/crearUsuario");
     }
   },

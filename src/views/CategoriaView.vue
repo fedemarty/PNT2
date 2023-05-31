@@ -2,7 +2,7 @@
   <ion-page>
     <h1>Categorías</h1>
     <div>
-      <p>{{ userID }}</p>
+      <p>{{ userLOGIN }}</p>
     </div>
     <ion-content>
       <ion-grid>
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       listaCategorias: [],
-      userID: 0,
+      userLOGIN: 0,
     };
   },
 
@@ -93,7 +93,7 @@ export default {
 
     async cargarLista() {
       try {
-        this.listaCategorias = await listaCategorias.cargar(this.userID);
+        this.listaCategorias = await listaCategorias.cargar(this.userLOGIN);
       } catch (e) {
         alert(e);
       }

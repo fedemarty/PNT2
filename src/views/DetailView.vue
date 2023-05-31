@@ -3,7 +3,7 @@
     <h1>Detalle de gastos</h1>
     <div>
       <p>{{ userIDtest }}</p>
-      <p>{{ store.userID }}</p>
+      <p>{{ userLOGIN }}</p>
     </div>
     <ion-content>
       <ion-grid>
@@ -55,9 +55,8 @@ export default {
   components: { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow },
   setup() {
     const store = useLoginStore();
-    const { login } = store;
-    const { userID } = storeToRefs(store)
-    return { create, trash, add, login, store, userID };
+    const { login , userLOGIN} = store;
+    return { login, userLOGIN };
   },
   data() {
     return {
@@ -84,8 +83,10 @@ export default {
       }
     },
     async cargarLista() {
+      this.usuario = this.userLOGIN;
       try {
-        this.listaGastos = await listaGastos.cargar(this.userID)
+        this.listaGastos = await listaGastos.cargar(this.userLOGIN.userID)
+        console.log(this.listaGastos)
         this.listaCategorias = await listaCategorias.cargar()
         } catch (e) {
         alert(e)

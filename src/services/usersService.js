@@ -8,7 +8,6 @@ const apiClient = axios.create({
     "Content-Type": "application/json",
   },
 });
-const user = "/user/"
 
 export default {
   async cargar() {
@@ -24,29 +23,27 @@ export default {
       const response = await apiClient.get("/user?email="+filtro);
       console.log(response.data[0])
       return response.data[0];
-      
-
     } catch (error) {
       throw "Error de conexión";
     }
   },
   async agregar(elem) {
     try {
-      await apiClient.post(user, elem);
+      await apiClient.post("/user/", elem);
     } catch (error) {
       throw "Error de conexion";
     }
   },
   async eliminar(id) {
     try {
-      await apiClient.delete(user + id);
+      await apiClient.delete("/user/" + id);
     } catch (error) {
       throw "Error de conexion";
     }
   },
   async modificar(id, elem) {
     try {
-      await apiClient.put(user + id, elem);
+      await apiClient.put("/user/ "+ id, elem);
     } catch (error) {
       throw "Error de conexion";
     }

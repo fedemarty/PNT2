@@ -7,12 +7,11 @@ const apiClient = axios.create({
     "Content-Type": "application/json",
   },
 });
-const lista = "/lista/"
 
 export default {
   async cargar() {
     try {
-      const response = await apiClient.get(lista);
+      const response = await apiClient.get("/lista/");
       return response.data;
     } catch (error) {
       throw "Error de conexion";
@@ -20,21 +19,21 @@ export default {
   },
   async agregar(elem) {
     try {
-      await apiClient.post(lista, elem);
+      await apiClient.post("/lista/", elem);
     } catch (error) {
       throw "Error de conexion";
     }
   },
   async eliminar(id) {
     try {
-      await apiClient.delete(lista + id);
+      await apiClient.delete("/lista/" + id);
     } catch (error) {
       throw "Error de conexion";
     }
   },
   async modificar(id, elem) {
     try {
-      await apiClient.put(lista + id, elem);
+      await apiClient.put("/lista/" + id, elem);
     } catch (error) {
       throw "Error de conexion";
     }

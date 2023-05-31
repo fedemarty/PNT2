@@ -7,12 +7,11 @@ const apiClient = axios.create({
     "Content-Type": "application/json",
   },
 });
-const gastos = "/gastos/"
 
 export default {
   async cargar() {
     try {
-      const response = await apiClient.get(gastos);
+      const response = await apiClient.get("/gastos/");
       return response.data;
     } catch (error) {
       throw "Error de conexion";
@@ -28,21 +27,21 @@ export default {
   },
   async agregar(elem) {
     try {
-      await apiClient.post(gastos, elem);
+      await apiClient.post("/gastos/", elem);
     } catch (error) {
       throw "Error de conexion";
     }
   },
   async eliminar(id) {
     try {
-      await apiClient.delete(gastos + id);
+      await apiClient.delete("/gastos/" + id);
     } catch (error) {
       throw "Error de conexion";
     }
   },
   async modificar(id, elem) {
     try {
-      await apiClient.put(gastos + id, elem);
+      await apiClient.put("/gastos/" + id, elem);
     } catch (error) {
       throw "Error de conexion";
     }
