@@ -1,9 +1,10 @@
 <template >
   <ion-page>
     <h1>Detalle de gastos</h1>
-  <div>
-    <p>{{ userID }}</p>
-  </div>
+    <div>
+      <p>{{ userIDtest }}</p>
+      <p>{{ store.userID }}</p>
+    </div>
     <ion-content>
       <ion-grid>
         <ion-row style="background-color: #0775c4;">
@@ -27,7 +28,7 @@
           <ion-col size-sm="2">{{ e.fecha }}</ion-col>
           <ion-col size-sm="2">{{ e.name }}</ion-col>
           <ion-col size-sm="2">${{ e.monto }}</ion-col>
-          <ion-col size-sm="2">{{ e.cat }}</ion-col>
+          <ion-col size-sm="2">{{ buscarCategoriaXID(e.cat) }}</ion-col>
           <ion-col size="auto" @click='modificar(e.id)' style="border: 0px;"><ion-button><ion-icon slot="icon-only"
                 :icon="create"></ion-icon></ion-button></ion-col>
           <ion-col size="auto" @click='eliminar(e.id)' style="border: 0px;"><ion-button> <ion-icon slot="icon-only"
@@ -49,25 +50,28 @@ import { create, trash, add } from 'ionicons/icons';
 import listaGastos from '../services/listaGastos'
 import listaCategorias from "../services/listaCategorias"
 import { useLoginStore } from "../stores/login";
+import { storeToRefs } from "pinia";
 export default {
   components: { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow },
   setup() {
     const store = useLoginStore();
     const { login } = store;
-    return { create, trash, add, login, store };
-      },
+    const { userID } = storeToRefs(store)
+    return { create, trash, add, login, store, userID };
+  },
   data() {
     return {
       listaGastos: [],
       listaCategorias: [],
-      userID:0
-       }
+      userIDtest: 80,
+      categoria: {}
+    }
   },
   methods: {
     agregarGasto() {
       this.$router.push("/agregarGasto")
     },
-    modificar(){
+    modificar() {
       this.$router.push("/editarGasto");
     },
     async agregar() {
@@ -83,10 +87,11 @@ export default {
       try {
         this.listaGastos = await listaGastos.cargar(this.userID)
         this.listaCategorias = await listaCategorias.cargar()
-      } catch (e) {
+        } catch (e) {
         alert(e)
       }
     },
+
     async eliminar(id) {
       try {
         await listaGastos.eliminar(id)
@@ -94,6 +99,21 @@ export default {
       } catch (error) {
         alert(error)
       }
+    },
+    buscarCategoriaXID(id) {
+     
+      try {
+        //this.listaCategorias.forEach(element => {
+        //this.categoria=element;
+        //console.log(element);
+        //}
+        //);
+        //console.log( "-----"+this.listaCategorias.find(e => e.id ==id))
+  
+        return this.listaCategorias.find(objeto => objeto.id == id).categoria
+
+      } catch (error) {
+        return "sin categoria"}
     },
   },
   mounted() {

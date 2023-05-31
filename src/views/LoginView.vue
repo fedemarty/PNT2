@@ -28,15 +28,17 @@ export default {
   },
   data() {
     return {
-      usuario: { email: "", passw: "" },
+      usuario: { email: "", passw: "", userID:"" },
     };
   },
   methods: {
-    logear() {
+   async logear() {
+    const miusuario = await usersService.cargarUsuarioXID(this.usuario.email)
+console.log(miusuario)
       if (
-        this.usuario = usersService.cargar()
-      ) {
-        this.login()
+        this.usuario =  miusuario) {
+        this.login(miusuario.id)
+        
         this.usuario = { email: "", passw: "" };
         this.$router.push("/detail");
       } else {
