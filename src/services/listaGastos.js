@@ -20,9 +20,7 @@ export default {
   },
   async cargar(filtro) {
     try {
-      const response = await apiClient.get(gastos, {
-        params: filtro
-      });
+      const response = await apiClient.get("/gastos?userID="+filtro);
       return response.data;
     } catch (error) {
       throw "Error de conexión";

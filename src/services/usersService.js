@@ -19,6 +19,17 @@ export default {
       throw "Error de conexion";
     }
   },
+  async cargarUsuarioXID(filtro) {
+    try {
+      const response = await apiClient.get("/user?email="+filtro);
+      console.log(response.data[0])
+      return response.data[0];
+      
+
+    } catch (error) {
+      throw "Error de conexión";
+    }
+  },
   async agregar(elem) {
     try {
       await apiClient.post(user, elem);
