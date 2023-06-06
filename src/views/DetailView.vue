@@ -33,6 +33,15 @@
       </ion-grid>
       <ion-button @click="agregarGasto"> Gasto<ion-icon slot="icon-only" :icon="add"></ion-icon></ion-button>
       <ion-button @click="agregarCategoria"> Categoria<ion-icon slot="icon-only" :icon="add"></ion-icon></ion-button>
+      
+    <!--Modificar gasto-->
+        <ion-input label="Fecha:" label-placement="stacked" v-model="elemento.fecha"></ion-input>
+        <ion-input label="Descripcion:" label-placement="stacked" v-model="elemento.name"></ion-input>
+        <ion-input label="Monto:" label-placement="stacked" v-model="elemento.monto"></ion-input>
+        <ion-input label="Categoria:" label-placement="stacked" v-model="elemento.categoria"></ion-input>
+         <ion-button @click="agregar"> Agregar a la lista </ion-button>
+         <ion-button @click="cargarLista">Cargar Lista</ion-button>
+
     </ion-content>
   </ion-page>
 </template>
@@ -56,22 +65,36 @@ export default {
       listasGastos: [],
       listasCategorias: [],
       categoria: {},
-      // elemento: {name: "", monto: 0, fecha: 0, cat: 0, userID: 0, id: ""},
-      elemento: {}
+     //elemento: {name: "", monto: '', fecha: null, cat: null},
+     elemento:{},
+     //elemento: {id:'',name:'', monto:'', fecha:null, cat:null },
+     
+
     }
   },
   methods: {
+    /*Lo esta mandando vacio, o por lo menos se borran los datos cuando lo quiero modificar*/ 
+    async modificar(id) {
+      try {
+        const elem = { ...this.elemento }
+        //await axios.put("https://6464027e127ad0b8f895db50.mockapi.io/lista/" + id, elem)
+        await listaGastos.modificar(id,elem)
+        await this.cargarLista()
+      } catch ( error) {
+          alert(error)
+      }
+    },
     agregarCategoria() {
       this.$router.push("/agregarCategoria")
     },
     agregarGasto() {
       this.$router.push("/agregarGasto")
     },
-    modificar(id) {;
+    /*modificar(id) {;
       this.$router.push({path: "/editarGasto",
         query: { Id: id }
       });
-    },
+    },*/
     async agregar() {
       try {
         const elem = { ...this.elemento }
