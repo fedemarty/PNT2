@@ -56,8 +56,7 @@ import listaGastos from '../services/listaGastos';
     mounted() {
       this.obtenerFechaActual();
       const Id =this.$route.query.Id;
-    //  this.elemento= this.obtenerGasto(Id);
-     console.log(Id)
+      console.log(Id)
 },
   };
   </script>
