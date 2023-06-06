@@ -2,8 +2,7 @@
   <ion-page>
     <h1>Detalle de gastos</h1>
     <div>
-      <!-- <p>{{ userIDtest }}</p> -->
-      <p>{{ userLOGIN }}</p>
+      <!-- <p>{{ userLOGIN }}</p> -->
     </div>
     <ion-content>
       <ion-grid>
@@ -21,7 +20,6 @@
             <h2>Categoria</h2>
           </ion-col>
           <ion-col size-sm="6">
-
           </ion-col>
         </ion-row>
         <ion-row v-for="e in listasGastos" :key="e.id">
@@ -29,54 +27,55 @@
           <ion-col size-sm="2">{{ e.name }}</ion-col>
           <ion-col size-sm="2">${{ e.monto }}</ion-col>
           <ion-col size-sm="2">{{ e.cat }}</ion-col>
-          <ion-col size="auto" @click='modificar(e.id)' style="border: 0px;"><ion-button><ion-icon slot="icon-only"
-                :icon="create"></ion-icon></ion-button></ion-col>
-          <ion-col size="auto" @click='eliminar(e.id)' style="border: 0px;"><ion-button> <ion-icon slot="icon-only"
-                :icon="trash"></ion-icon>
-
-            </ion-button></ion-col>
+          <ion-col size="auto" @click='modificar(e.id)' style="border: 0px;"><ion-button><ion-icon slot="icon-only" :icon="create"></ion-icon></ion-button></ion-col> 
+          <ion-col size="auto" @click='eliminar(e.id)' style="border: 0px;"><ion-button> <ion-icon slot="icon-only" :icon="trash"></ion-icon></ion-button></ion-col>
         </ion-row>
       </ion-grid>
-      <ion-button @click="agregarGasto"><ion-icon slot="icon-only" :icon="add"></ion-icon></ion-button>
-      <ion-button @click="agregarCategoria"><ion-icon slot="icon-only" :icon="add"></ion-icon></ion-button>
-
+      <ion-button @click="agregarGasto"> Gasto<ion-icon slot="icon-only" :icon="add"></ion-icon></ion-button>
+      <ion-button @click="agregarCategoria"> Categoria<ion-icon slot="icon-only" :icon="add"></ion-icon></ion-button>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow } from '@ionic/vue'
+import { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow } from '@ionic/vue';
 import { create, trash, add } from 'ionicons/icons';
-import listaGastos from '../services/listaGastos'
-import listaCategorias from "../services/listaCategorias"
+import listaGastos from '../services/listaGastos';
+import listaCategorias from "../services/listaCategorias";
 import { useLoginStore } from "../stores/login";
-import { storeToRefs } from "pinia";
+// import { storeToRefs } from "pinia";
 export default {
-  components: { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow },
+  components: { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow, create, trash, add },
   setup() {
     const store = useLoginStore();
     const { login , userLOGIN} = store;
-    return { login, userLOGIN };
+    return { login, userLOGIN, create, trash, add };
   },
   data() {
     return {
       listasGastos: [],
       listasCategorias: [],
-      //userIDtest: 80,
-      categoria: {}
+      categoria: {},
+      // elemento: {name: "", monto: 0, fecha: 0, cat: 0, userID: 0, id: ""},
+      elemento: {}
     }
   },
   methods: {
     agregarGasto() {
       this.$router.push("/agregarGasto")
     },
-    modificar() {
-      this.$router.push("/editarGasto");
+    modificar(id) {;
+      this.$router.push({path: "/editarGasto",
+        query: { Id: id }
+      });
     },
     async agregar() {
       try {
         const elem = { ...this.elemento }
         await listaGastos.agregar(elem)
+        this.cargarLista()
+
+        elemento = {}
       } catch (error) {
         console.log(error);
       }
@@ -86,9 +85,6 @@ export default {
       try {
         this.listasGastos = await listaGastos.cargar(this.userLOGIN.userID)
         this.listasCategorias = await listaCategorias.cargar()
-        console.log(this.listasCategorias)
-        console.log(this.listasGastos)
-        console.log(this.userLOGIN.userID)
         } catch (e) {
         alert(e)
       }
@@ -118,9 +114,12 @@ export default {
         return "sin categoria"}
     },
   },
-  mounted() {
+  updated() {
     this.cargarLista();
-  }
+  },
+  // mounted() {
+  //   this.cargarLista();
+  // }
 }
 
 </script>
@@ -131,8 +130,6 @@ ion-grid {
   border-collapse: collapse;
   width: 98%;
   margin: auto;
-
-
 }
 
 ion-row {

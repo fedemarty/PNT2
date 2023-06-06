@@ -8,8 +8,8 @@ export default {
   components: { IonApp, IonHeader, IonRouterOutlet },
   setup() {
     const store = useLoginStore();
-    const { isLogin } = storeToRefs(store) ;
-    return { isLogin };
+    const { isLogin, userLOGIN } = storeToRefs(store) ;
+    return { isLogin,userLOGIN, RouterLink, RouterView };
   }
 }
 </script>
@@ -25,7 +25,7 @@ export default {
       <RouterLink v-if="isLogin" to="/logout">Logout |</RouterLink>
       <RouterLink v-if="isLogin" to="/editarUsuario">EditarUsuario |</RouterLink>
       <RouterLink v-if="isLogin" to="/detail">Detalles |</RouterLink>
-      <!-- Usuario:{{ userLOGIN.name }} -->
+      Usuario:{{ userLOGIN.email }}
     </ion-header>
     <ion-router-outlet />
   </ion-app>

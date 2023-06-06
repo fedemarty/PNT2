@@ -1,6 +1,7 @@
 <template>
     <ion-page>
       <h1>Editar Gasto</h1>
+      {{ this.elemento }}
       <ion-content> 
         <ion-input label="Id:" label-placement="stacked" v-model="elemento.id"></ion-input>
         <ion-input label="Fecha:" label-placement="stacked" :value="elemento.fecha" readonly></ion-input>
@@ -21,18 +22,23 @@ import listaGastos from '../services/listaGastos';
     components: { IonPage, IonButton, IonInput, IonContent },
     setup() {
       const store = useLoginStore();
-      const { login } = store;
+      const { login} = store;
       return { login };
     },
     data() {
       return {
-        elemento: {},
+        elemento: {}
       };
     },
     methods: {
-      async modificar(id) {
+      // async obtenerGasto(Id) { 
+      //   const ele = { ...this.elemento }
+      //   console.log(ele)
+      //   return await this.listaGastos.cargarDatos(Id);
+      // },
+      async modificar(id, elem) {
       try {
-        const elem = { ...this.elemento }
+        elem = { ...this.elemento }
         await listaGastos.modificar(id,elem)
         this.$router.push('/detail')
       } catch ( error) {
@@ -48,7 +54,10 @@ import listaGastos from '../services/listaGastos';
   },
     },
     mounted() {
-  this.obtenerFechaActual();
+      this.obtenerFechaActual();
+      const Id =this.$route.query.Id;
+    //  this.elemento= this.obtenerGasto(Id);
+     console.log(Id)
 },
   };
   </script>

@@ -3,11 +3,7 @@
     <ion-content >
       <h2>Login</h2>
       <ion-input v-model="usuario.email" label="Email:" type="email"></ion-input>
-      <ion-input
-        v-model="usuario.password"
-        label="Password:"
-        type="password"
-      ></ion-input>
+      <ion-input v-model="usuario.password" label="Password:" type="password"></ion-input>
       <ion-button @click="logear">Login</ion-button>
       <ion-button @click="crear">Crear Usuario</ion-button>
     </ion-content>
@@ -17,7 +13,7 @@
 <script>
 import { IonPage, IonButton, IonInput, IonContent } from "@ionic/vue";
 import { useLoginStore } from "../stores/login";
-import usersService from '../services/usersService';
+import userService from '../services/userService';
 
 export default {
   components: { IonPage, IonButton, IonInput, IonContent },
@@ -34,11 +30,9 @@ export default {
   },
   methods: {
    async logear() {
-    const miusuario = await usersService.cargarUsuarioXID(this.usuario.email)
-    console.log(miusuario)
+    const miusuario = await userService.cargarUsuarioXID(this.usuario.email)
       if (this.usuario.email ==  miusuario.email && this.usuario.password == miusuario.password) {
         this.login(miusuario)
-        console.log(miusuario)
         this.usuario = {name:"", email:"",password:"", userID:0};
         this.$router.push('/detail');
       } else {

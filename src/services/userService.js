@@ -36,14 +36,14 @@ export default {
   },
   async eliminar(id) {
     try {
-      await apiClient.delete("/user/" + id);
+      await apiClient.delete("/user/"+ id);
     } catch (error) {
       throw "Error de conexion";
     }
   },
   async modificar(id, elem) {
     try {
-      await apiClient.put("/user/ "+ id, elem);
+      await apiClient.put("/user/"+ id, elem);
     } catch (error) {
       throw "Error de conexion";
     }

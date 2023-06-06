@@ -13,7 +13,7 @@
 <script>
 import { IonPage, IonButton, IonInput, IonContent } from "@ionic/vue";
 import { useLoginStore } from "../stores/login";
-import userService from '../services/usersService'
+import userService from '../services/userService'
 import { useCssVars } from 'vue';
 
 export default {
