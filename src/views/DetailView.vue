@@ -61,6 +61,9 @@ export default {
     }
   },
   methods: {
+    agregarCategoria() {
+      this.$router.push("/agregarCategoria")
+    },
     agregarGasto() {
       this.$router.push("/agregarGasto")
     },
