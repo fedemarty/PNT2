@@ -67,7 +67,7 @@ export default {
 
   data() {
     return {
-      listasCategorias: [],
+      listaCategorias: [],
       userLOGIN: 0,
     };
   },
@@ -93,7 +93,7 @@ export default {
 
     async cargarLista() {
       try {
-        this.listasCategorias = await listaCategorias.cargar(this.userLOGIN);
+        this.listaCategorias = await listaCategorias.cargar(this.userLOGIN);
       } catch (e) {
         alert(e);
       }
