@@ -98,6 +98,9 @@ export default {
         alert(error)
       }
     },
+    agregarCategoria() {
+      this.$router.push("/agregarCategoria")
+    },
     buscarCategoriaXID(id) {
      
       try {
