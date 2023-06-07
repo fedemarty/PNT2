@@ -6,6 +6,7 @@
       <ion-input v-model="usuario.password" label="Password:" type="password"></ion-input>
       <ion-button @click="logear">Login</ion-button>
       <ion-button @click="crear">Crear Usuario</ion-button>
+      {{ mensajeError }}
     </ion-content>
   </ion-page>
 </template>
@@ -25,25 +26,44 @@ export default {
   name: 'login',
   data() {
     return {
+      listaUsuarios:[],
       usuario: {name:"", email:"",password:"", userID:0},
+      mensajeError: ""
     };
   },
   methods: {
-   async logear() {
-    const miusuario = await userService.cargarUsuarioXID(this.usuario.email)
-      if (this.usuario.email ==  miusuario.email && this.usuario.password == miusuario.password) {
-        this.login(miusuario)
-        this.usuario = {name:"", email:"",password:"", userID:0};
-        this.$router.push('/detail');
-      } else {
-        alert("Credenciales invalidas");
+    async cargarLista() {
+      try {
+        this.listaUsuarios = await userService.cargar()
+        // console.log(this.listaUsuarios)
+        } catch (e) {
+        alert(e)
       }
     },
+
+   async logear() {
+    try{
+      const miUsuario = this.listaUsuarios.find(objeto => objeto.email == this.usuario.email)
+      console.log(miUsuario.password + "-" + this.usuario.password)
+      // const miusuario = await userService.cargarUsuarioXID(this.usuario.userID)
+        if (miUsuario.password == this.usuario.password) {
+          this.login(miUsuario)
+          this.usuario = {name:"", email:"",password:"", userID:0};
+          this.$router.push('/detail');
+        } else {this.mensajeError = "Credenciales invalidas"}
+      }catch (e) {
+        alert("Credenciales invalidas")
+      }
+    },
+
     crear(){
       this.usuario = {name:"", email:"",password:"", userID:0};
       this.$router.push("/crearUsuario");
     }
   },
+  mounted() {
+    this.cargarLista();
+  }
 };
 </script>
 

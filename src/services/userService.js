@@ -12,7 +12,7 @@ const apiClient = axios.create({
 export default {
   async cargar() {
     try {
-      const response = await apiClient.get(user);
+      const response = await apiClient.get("/user/");
       return response.data;
     } catch (error) {
       throw "Error de conexion";
@@ -20,7 +20,7 @@ export default {
   },
   async cargarUsuarioXID(filtro) {
     try {
-      const response = await apiClient.get("/user?email="+filtro);
+      const response = await apiClient.get("/user?id="+filtro);
       console.log(response.data[0])
       return response.data[0];
     } catch (error) {

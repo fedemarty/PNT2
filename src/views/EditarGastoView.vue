@@ -31,11 +31,15 @@ import listaGastos from '../services/listaGastos';
       };
     },
     methods: {
-      // async obtenerGasto(Id) { 
-      //   const ele = { ...this.elemento }
-      //   console.log(ele)
-      //   return await this.listaGastos.cargarDatos(Id);
-      // },
+      async obtenerGasto(Id) {
+      try {
+       const gasto = await this.listaGastos.cargarDatos(Id)
+        console.log(gasto)
+        console.log(gasto.monto)
+      } catch (error) {
+        alert(error)
+      }
+  },
       async modificar(id, elem) {
       try {
         elem = { ...this.elemento }
@@ -55,8 +59,9 @@ import listaGastos from '../services/listaGastos';
     },
     mounted() {
       this.obtenerFechaActual();
-      const Id =this.$route.query.Id;
+      const Id =this.$route.params.id;
       console.log(Id)
+      this.obtenerGasto(Id);
 },
   };
   </script>

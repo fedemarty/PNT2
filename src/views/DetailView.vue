@@ -43,12 +43,13 @@ import { create, trash, add } from 'ionicons/icons';
 import listaGastos from '../services/listaGastos';
 import listaCategorias from "../services/listaCategorias";
 import { useLoginStore } from "../stores/login";
-// import { storeToRefs } from "pinia";
+import { storeToRefs } from "pinia";
 export default {
   components: { IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow, create, trash, add },
   setup() {
     const store = useLoginStore();
-    const { login , userLOGIN} = store;
+    const { login} = store;
+    const {userLOGIN} = storeToRefs(store)
     return { login, userLOGIN, create, trash, add };
   },
   data() {
@@ -65,9 +66,7 @@ export default {
       this.$router.push("/agregarGasto")
     },
     modificar(id) {;
-      this.$router.push({path: "/editarGasto",
-        query: { Id: id }
-      });
+      this.$router.push({path: "/editarGasto/"+id});
     },
     async agregar() {
       try {
@@ -82,6 +81,7 @@ export default {
     },
     async cargarLista() {
       this.usuario = this.userLOGIN;
+      console.log(this.userLOGIN)
       try {
         this.listasGastos = await listaGastos.cargar(this.userLOGIN.userID)
         this.listasCategorias = await listaCategorias.cargar()

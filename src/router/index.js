@@ -27,7 +27,7 @@ const router = createRouter({
       component: SystemView
     },
     {
-      path: '/editarGasto',
+      path: '/editarGasto/:id',
       name: 'editarGasto',
       component: EditarGastoView
     },
