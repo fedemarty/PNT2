@@ -25,7 +25,7 @@ export default {
   methods: {
     getout() {
         this.logout()
-        this.usuario = { email: "", passw: "" };
+        // this.usuario = { email: "", passw: "" };
         this.$router.push("/");
     }    
   },

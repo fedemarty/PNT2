@@ -9,7 +9,7 @@ export const useLoginStore = defineStore('login', {
     actions: {
         logout() {
             this.isLogin = false
-            this.userLOGIN = null
+            this.userLOGIN = {}
         },
         login(userLOGIN) {
             this.isLogin = true

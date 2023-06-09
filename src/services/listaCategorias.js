@@ -17,6 +17,14 @@ export default {
       throw "Error de conexion";
     }
   },
+  async cargarDatos(filtro) {
+    try {
+      const response = await apiClient.get("/categorias/" + filtro);
+      return response.data;
+    } catch (error) {
+      throw "Error de conexión";
+    }
+  },
   async cargar(filtro) {
     try {
       const response = await apiClient.get("/categorias/", {

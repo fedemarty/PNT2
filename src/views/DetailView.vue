@@ -81,7 +81,6 @@ export default {
     },
     async cargarLista() {
       this.usuario = this.userLOGIN;
-      console.log(this.userLOGIN)
       try {
         this.listasGastos = await listaGastos.cargar(this.userLOGIN.userID)
         this.listasCategorias = await listaCategorias.cargar()
@@ -120,9 +119,6 @@ export default {
   updated() {
     this.cargarLista();
   },
-  // mounted() {
-  //   this.cargarLista();
-  // }
 }
 
 </script>

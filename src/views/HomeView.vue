@@ -3,7 +3,13 @@
     <h2>Home view</h2>
     
     <ion-content>
-      
+    <h4>- Api de gestor de gastos -</h4>  
+
+    <p>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </p>
+    
+    <p>Podras cargar y llevar un registro de todos los gastos realizados </p>  
+    
+    <p>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </p>
       
 
     </ion-content>

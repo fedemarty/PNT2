@@ -19,7 +19,7 @@ export default {
   },
   async cargarDatos(filtro) {
     try {
-      const response = await apiClient.get("/gastos?id="+filtro);
+      const response = await apiClient.get("/gastos/" + filtro);
       return response.data;
     } catch (error) {
       throw "Error de conexión";

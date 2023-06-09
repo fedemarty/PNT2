@@ -1,22 +1,22 @@
 <template>
     <ion-page>
       <h1>Editar Gasto</h1>
-      {{ this.elemento }}
       <ion-content> 
-        <ion-input label="Id:" label-placement="stacked" v-model="elemento.id"></ion-input>
+        <!-- <ion-input label="Id:" label-placement="stacked" v-model="elemento.id"></ion-input> -->
         <ion-input label="Fecha:" label-placement="stacked" :value="elemento.fecha" readonly></ion-input>
         <ion-input label="Descripcion:" label-placement="stacked" v-model="elemento.name"></ion-input>
         <ion-input label="Monto:" label-placement="stacked" v-model="elemento.monto"></ion-input>
         <ion-button @click="modificar(elemento.id)"> ACEPTAR </ion-button>
         <ion-button @click="volver"> VOLVER </ion-button>
       </ion-content>
+      {{elemento }}
     </ion-page>
   </template>
   
   <script>
   import { IonPage, IonButton, IonInput, IonContent } from "@ionic/vue";
   import { useLoginStore } from "../stores/login";
-import listaGastos from '../services/listaGastos';
+  import listaGastos from '../services/listaGastos';
   
   export default {
     components: { IonPage, IonButton, IonInput, IonContent },
@@ -27,15 +27,15 @@ import listaGastos from '../services/listaGastos';
     },
     data() {
       return {
-        elemento: {}
+        elemento: {},
+        gastos:[]
       };
     },
     methods: {
-      async obtenerGasto(Id) {
+      async obtenerGasto(id) {
       try {
-       const gasto = await this.listaGastos.cargarDatos(Id)
-        console.log(gasto)
-        console.log(gasto.monto)
+        this.elemento = await listaGastos.cargarDatos(id);
+        console.log(this.elemento)
       } catch (error) {
         alert(error)
       }
@@ -53,14 +53,14 @@ import listaGastos from '../services/listaGastos';
         this.$router.push("/detail");
       },
       obtenerFechaActual() {
-    const fechaActual = new Date().toISOString().slice(0, 10);
-    this.elemento.fecha = fechaActual;
+        const fechaActual = new Date().toISOString().slice(0, 10);
+        // this.elemento.fecha = fechaActual;
+        console.log(this.elemento)
   },
     },
     mounted() {
-      this.obtenerFechaActual();
+      // this.obtenerFechaActual();
       const Id =this.$route.params.id;
-      console.log(Id)
       this.obtenerGasto(Id);
 },
   };

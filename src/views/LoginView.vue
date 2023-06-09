@@ -35,7 +35,6 @@ export default {
     async cargarLista() {
       try {
         this.listaUsuarios = await userService.cargar()
-        // console.log(this.listaUsuarios)
         } catch (e) {
         alert(e)
       }
@@ -44,8 +43,6 @@ export default {
    async logear() {
     try{
       const miUsuario = this.listaUsuarios.find(objeto => objeto.email == this.usuario.email)
-      console.log(miUsuario.password + "-" + this.usuario.password)
-      // const miusuario = await userService.cargarUsuarioXID(this.usuario.userID)
         if (miUsuario.password == this.usuario.password) {
           this.login(miUsuario)
           this.usuario = {name:"", email:"",password:"", userID:0};

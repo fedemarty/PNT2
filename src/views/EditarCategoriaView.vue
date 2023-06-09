@@ -2,7 +2,7 @@
     <ion-page>
       <h1>Editar Categoría</h1>
       <ion-content> 
-        <ion-input label="Id:" label-placement="stacked" v-model="elemento.id"></ion-input>
+        <!-- <ion-input label="Id:" label-placement="stacked" v-model="elemento.id"></ion-input> -->
         <ion-input label="Categoria:" label-placement="stacked" v-model="elemento.categoria"></ion-input>
         <ion-button @click="modificar(elemento.id)"> ACEPTAR </ion-button>
         <ion-button @click="volver"> VOLVER </ion-button>
@@ -28,6 +28,14 @@
       };
     },
     methods: {
+      async obtenerCategoria(id) {
+      try {
+        this.elemento = await listaCategorias.cargarDatos(id);
+        console.log(this.elemento)
+      } catch (error) {
+        alert(error)
+      }
+    },
       async modificar(id) {
       try {
         const elem = { ...this.elemento }
@@ -46,7 +54,9 @@
   },
     },
     mounted() {
-  this.obtenerFechaActual();
+      const Id =this.$route.params.id;
+      console.log(Id)
+      this.obtenerCategoria(Id);
 },
   };
   </script>

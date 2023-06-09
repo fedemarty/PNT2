@@ -23,26 +23,59 @@ export default {
     },
     data() {
     return {
-      listasCategoria: [],
+      listasCategorias: [],
       nuevoObjeto: {},
     };
   },
   methods: {
+    async cargarLista() {
+      try {
+        this.usuario = this.userLOGIN;
+        this.listasCategorias = await listaCategorias.cargar()
+      } catch (e) {
+        alert(e)
+      }
+    },
       async agregar() {
         const nuevoObjeto = {
-        // Propiedades del nuevo objeto a agregar
         id: this.nuevoObjeto.id,
-        categoria: this.nuevoObjeto.categoria,
-
+        categoria: this.nuevoObjeto.categoria
       }
         try {
+          console.log(nuevoObjeto)
           await listaCategorias.agregar(nuevoObjeto)
+          this.cargarLista()
           this.$router.push('/categoria')
         } catch (error) {
           console.log(error);
         }
       }
-   }};
+    //   async agregarGasto() {
+    //   const nuevoObjeto = {
+    //     id: this.nuevoObjeto.id,
+    //     fecha: this.nuevoObjeto.fecha,
+    //     name: this.nuevoObjeto.name,
+    //     monto: this.nuevoObjeto.monto,
+    //     cat: this.nuevoObjeto.cat,
+    //     userID: this.userLOGIN.userID
+    //   }
+    //   console.log(this.listasGastos),
+    //   console.log(this.listasCategorias),
+    //   console.log(this.userLOGIN),
+    //   console.log(nuevoObjeto)
+    //   try {
+    //     await listaGastos.agregar(nuevoObjeto)
+    //     this.cargarLista()
+    //     this.$router.push('/detail')
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }  
+  },
+  mounted() {
+    this.cargarLista();
+  }
+};
 </script>
   
 <style>

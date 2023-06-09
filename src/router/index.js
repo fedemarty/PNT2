@@ -67,7 +67,7 @@ const router = createRouter({
       component: AgregarCategoriaView
     },
     {
-      path: '/editarCategoria',
+      path: '/editarCategoria/:id',
       name: "editarCategoria",
       component: EditarCategoriaView
     },

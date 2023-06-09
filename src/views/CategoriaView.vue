@@ -2,7 +2,7 @@
   <ion-page>
     <h1>Categorías</h1>
     <div>
-      <p>{{ userLOGIN }}</p>
+      <!-- <p>{{ userLOGIN }}</p> -->
     </div>
     <ion-content>
       <ion-grid>
@@ -18,46 +18,25 @@
         <ion-row v-for="e in listaCategorias" :key="e.id">
           <ion-col size-sm="2">{{ e.id }}</ion-col>
           <ion-col size-sm="2">{{ e.categoria }}</ion-col>
-          <ion-col size="auto" @click="modificar(e.id)" style="border: 0px"
-            ><ion-button
-              ><ion-icon slot="icon-only" :icon="create"></ion-icon></ion-button
-          ></ion-col>
-          <ion-col size="auto" @click="eliminar(e.id)" style="border: 0px"
-            ><ion-button>
-              <ion-icon slot="icon-only" :icon="trash"></ion-icon> </ion-button
-          ></ion-col>
+          <ion-col size="auto" @click="modificar(e.id)" style="border: 0px"><ion-button><ion-icon slot="icon-only" :icon="create">
+          </ion-icon></ion-button></ion-col>
+          <ion-col size="auto" @click="eliminar(e.id)" style="border: 0px"><ion-button>
+          <ion-icon slot="icon-only" :icon="trash"></ion-icon> </ion-button></ion-col>
         </ion-row>
       </ion-grid>
-      <ion-button @click="agregarCategoria"
-        ><ion-icon slot="icon-only" :icon="add"></ion-icon
+      <ion-button @click="agregarCategoria"> Categoria<ion-icon slot="icon-only" :icon="add"></ion-icon
       ></ion-button>
     </ion-content>
   </ion-page>
 </template>
     
 <script>
-import {
-  IonPage,
-  IonContent,
-  IonGrid,
-  IonIcon,
-  IonButton,
-  IonCol,
-  IonRow,
-} from "@ionic/vue";
+import {IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow} from "@ionic/vue";
 import { create, trash, add } from "ionicons/icons";
 import listaCategorias from "../services/listaCategorias";
 import { useLoginStore } from "../stores/login";
 export default {
-  components: {
-    IonPage,
-    IonContent,
-    IonGrid,
-    IonIcon,
-    IonButton,
-    IonCol,
-    IonRow,
-  },
+  components: {IonPage, IonContent, IonGrid, IonIcon, IonButton, IonCol, IonRow},
 
   setup() {
     const store = useLoginStore();
@@ -77,8 +56,8 @@ export default {
       this.$router.push("/agregarCategoria");
     },
 
-    modificar() {
-      this.$router.push("/editarCategoria");
+    modificar(id) {
+      this.$router.push({path: "/editarCategoria/"+id});
     },
 
     async agregar() {
@@ -109,6 +88,9 @@ export default {
   },
   
   mounted() {
+    this.cargarLista();
+  },
+  updated() {
     this.cargarLista();
   },
 };

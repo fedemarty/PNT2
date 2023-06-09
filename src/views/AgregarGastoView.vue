@@ -66,10 +66,6 @@ export default {
         userID: this.userLOGIN.userID
         
       }
-      console.log(this.listasGastos),
-      console.log(this.listasCategorias),
-      console.log(this.userLOGIN),
-      console.log(nuevoObjeto)
       try {
         await listaGastos.agregar(nuevoObjeto)
         this.cargarLista()
