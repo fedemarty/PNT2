@@ -1,9 +1,6 @@
 <template >
   <ion-page>
     <h1>Categorías</h1>
-    <div>
-      <!-- <p>{{ userLOGIN }}</p> -->
-    </div>
     <ion-content>
       <ion-grid>
         <ion-row style="background-color: #0775c4">

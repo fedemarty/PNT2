@@ -2,7 +2,6 @@
     <ion-page>
       <h1>Editar Gasto</h1>
       <ion-content> 
-        <!-- <ion-input label="Id:" label-placement="stacked" v-model="elemento.id"></ion-input> -->
         <ion-input label="Fecha:" label-placement="stacked" :value="elemento.fecha" readonly></ion-input>
         <ion-input label="Descripcion:" label-placement="stacked" v-model="elemento.name"></ion-input>
         <ion-input label="Monto:" label-placement="stacked" v-model="elemento.monto"></ion-input>
@@ -54,12 +53,9 @@
       },
       obtenerFechaActual() {
         const fechaActual = new Date().toISOString().slice(0, 10);
-        // this.elemento.fecha = fechaActual;
-        console.log(this.elemento)
   },
     },
     mounted() {
-      // this.obtenerFechaActual();
       const Id =this.$route.params.id;
       this.obtenerGasto(Id);
 },

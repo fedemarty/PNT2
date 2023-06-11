@@ -32,10 +32,8 @@ export default {
   async creacion() {
       try {
         const user = { ...this.usuario }
-        //await axios.post("https://6464027e127ad0b8f895db50.mockapi.io/lista",user)
         await userService.agregar(user)
         this.$router.push("/login")
-        // this.cargarLista()
       } catch (error) {
         console.log(error);
       }

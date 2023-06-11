@@ -20,8 +20,8 @@ export default {
   components: { IonPage, IonButton, IonInput, IonContent },
   setup() {
     const store = useLoginStore();
-    const { login, userLOGIN } = store;
-    return { login, userLOGIN };
+    const { login, logout, userLOGIN } = store;
+    return { login, logout, userLOGIN };
   },
   data() {
     return {
@@ -45,6 +45,7 @@ export default {
       try {
         await userService.eliminar(id)
         alert("Usuario eliminado")
+        this.logout()
         this.$router.push("/");
       } catch ( error) {
           alert(error)

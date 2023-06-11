@@ -2,7 +2,6 @@
   <ion-page>
     <h1>Detalle de gastos</h1>
     <div>
-      <!-- <p>{{ userLOGIN }}</p> -->
     </div>
     <ion-content>
       <ion-grid>
@@ -57,7 +56,6 @@ export default {
       listasGastos: [],
       listasCategorias: [],
       categoria: {},
-      // elemento: {name: "", monto: 0, fecha: 0, cat: 0, userID: 0, id: ""},
       elemento: {}
     }
   },

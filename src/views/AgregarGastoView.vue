@@ -2,22 +2,13 @@
   <ion-page>
     <h1>Agregar Gasto</h1>
     <ion-content>
-      <!-- <ion-input label="Id:" label-placement="stacked" v-model="nuevoObjeto.id"></ion-input> -->
-      <!-- <ion-datetime-button label="Fecha:" label-placement="stacked" v-model="nuevoObjeto.fecha" id="fechaSeleccionada"></ion-datetime-button> -->
-      <!--<ion-input label="Fecha:" label-placement="stacked" v-model="nuevoObjeto.fecha"></ion-input> -->
       <ion-datetime id="fechaSeleccionada" display-format="DD/MM/YYYY" v-model="nuevoObjeto.fecha" placeholder="Seleccionar fecha" ></ion-datetime>
       <ion-input label="Descripcion:" label-placement="stacked" v-model="nuevoObjeto.name"></ion-input>
       <ion-input label="Monto:" label-placement="stacked" v-model="nuevoObjeto.monto"></ion-input>
 
-      <!-- <ion-list > -->
-        <!-- <ion-select  aria-label="Categoria" v-model="nuevoObjeto.categoria" placeholder="Seleccionar categoria">
-          <ion-select-option v-for="e in listasCategorias" :key="e.id"  value=e>{{ e.categoria }}</ion-select-option> -->
           <ion-select aria-label="Categoria" v-model="nuevoObjeto.cat" placeholder="Seleccionar categoria">
           <ion-select-option v-for="c in listasCategorias" :key="c.id" :value="c.categoria">{{ c.categoria }}</ion-select-option>
           </ion-select>
-
-        <!-- </ion-select>
-      </ion-list> -->
 
       <ion-button @click="agregarGasto"> Agregar a la lista </ion-button>
     </ion-content>
@@ -42,7 +33,6 @@ export default {
       listasCategorias: [],
       listasGastos: [],
       nuevoObjeto: {},
-      // usuario:{}
     };
   },
   methods: {

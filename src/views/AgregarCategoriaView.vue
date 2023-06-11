@@ -42,7 +42,6 @@ export default {
         categoria: this.nuevoObjeto.categoria
       }
         try {
-          console.log(nuevoObjeto)
           await listaCategorias.agregar(nuevoObjeto)
           this.cargarLista()
           this.$router.push('/categoria')
